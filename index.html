@@ -31,7 +31,6 @@ button{cursor:pointer}
 .logo i:nth-of-type(1){color:var(--t1)}.logo i:nth-of-type(2){color:var(--t2)}.logo i:nth-of-type(3){color:var(--t4)}
 .tag{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:2px 5px}
 .search{position:relative;flex:1 1 120px;max-width:300px;min-width:0}
-@media (max-width:1360px) and (min-width:721px){.jumps button{padding:5px 7px;font-size:13px}.brand .tag{display:none}}
 .search input{width:100%;box-sizing:border-box;background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:7px 10px;outline-offset:0}
 .search input::placeholder{color:var(--muted)}
 .results{position:absolute;z-index:30;top:calc(100% + 4px);left:0;right:0;background:var(--raise);border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 32px rgba(0,0,0,.45);overflow:hidden}
@@ -51,6 +50,31 @@ button{cursor:pointer}
 .btn.primary:hover{background:#fff}
 .btn.danger{color:#ffb3bf;border-color:#5a2a35}
 .spacer{flex:1}
+.top{flex-wrap:nowrap;gap:8px;min-width:0}
+.tools{display:flex;gap:6px;flex:none}
+.ib{position:relative;flex:none;width:36px;height:36px;display:grid;place-items:center;padding:0;background:var(--raise);border:1px solid var(--line);border-radius:8px;color:var(--fg)}
+.ib:hover{border-color:#4a5263}
+.ib svg{width:19px;height:19px}
+.ib.primary{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.ib.primary:hover{background:#fff}
+.ib.ai{border-color:#4a4370;background:linear-gradient(180deg,#2c2843,#242036);color:#e4dcff}
+.ib[aria-expanded="true"]{border-color:#6b7385;background:var(--panel-2)}
+.ib.sm{width:26px;height:26px;border-radius:6px;background:none}
+.ib.sm svg{width:16px;height:16px;color:var(--muted)}
+.badge{position:absolute;top:-6px;right:-7px;min-width:17px;height:17px;box-sizing:border-box;padding:0 4px;border-radius:9px;background:var(--fg);color:var(--bg);font-family:var(--f-mono);font-size:10px;font-weight:600;line-height:17px;text-align:center}
+.top .search{flex:1 1 auto;max-width:440px;margin:0}
+.top.searching .spacer{display:none}
+.htog{width:24px;height:22px;display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:5px;color:var(--muted);padding:0;font-size:16px;line-height:1;margin-right:auto}
+.htog:hover{color:var(--fg);border-color:#4a5263}
+.rhead{gap:6px}
+.stage.nohead{--head:26px}
+.stage.nohead .rhead{padding:0 1px;justify-content:center}
+.stage.nohead .rhead .lvls{display:none}
+.stage.nohead .htog{margin:0}
+.stage.nohead .th{padding:0 0 0 9px!important}
+.stage.nohead .th>:not(.sw){display:none!important}
+.stage.nohead .th .sw{max-height:none!important;height:auto!important;align-self:stretch!important;margin:6px 0;width:5px}
+.stage.nohead .th.sub::before{display:none}
 
 /* stage */
 .stage{flex:1;min-height:0;position:relative;display:grid;grid-template-columns:var(--head) minmax(0,1fr);background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
@@ -211,7 +235,7 @@ button{cursor:pointer}
 @media (hover:none){.more{opacity:1}}
 .th.lvl-strip .more{height:18px}
 .th.tight .more,.th.lvl-compact .more,.th.lvl-strip .more{top:50%;right:58px;transform:translateY(-50%)}
-.qtip{position:fixed;z-index:70;pointer-events:none;background:var(--fg);color:var(--bg);font-size:12px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.qtip{position:fixed;z-index:70;pointer-events:none;max-width:min(320px,calc(100vw - 8px));white-space:normal!important;background:var(--fg);color:var(--bg);font-size:12px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.4)}
 .tbmenu{position:fixed;z-index:60;min-width:210px;max-width:calc(100vw - 16px);background:var(--raise);border:1px solid var(--line);border-radius:8px;box-shadow:0 14px 36px rgba(0,0,0,.5);padding:5px;display:flex;flex-direction:column}
 .tbmenu h3{margin:3px 7px 5px;font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
 .tbmenu button{display:flex;align-items:center;gap:9px;text-align:left;background:none;border:0;border-radius:5px;padding:7px 8px;color:var(--fg);font-size:13px;white-space:nowrap}
@@ -401,8 +425,11 @@ button.rpchip:hover{border-color:#4a5263}
   .th{gap:4px}
   .tn .long{display:none}.tn .short{display:inline}
   .tn small{font-size:9.5px}
-  .search{order:3;flex-basis:100%;max-width:none}
-  .jumps{order:4;flex-basis:100%}
+  .logo{font-size:21px}
+  .tools{gap:4px}
+  .ib{width:34px;height:34px}
+  .top.searching .brand{display:none}
+  .top.searching .tools .ib:not(#add){display:none}
   .hint{display:none}
   .panel{top:auto;bottom:8px;left:8px;right:8px;width:auto;max-height:58%}
   .focusbar{left:calc(var(--head) + 6px);right:6px;max-width:none}
@@ -418,6 +445,7 @@ button.rpchip:hover{border-color:#4a5263}
   .focusbar{padding:4px 4px 4px 8px;bottom:8px}
   .th .lvl{display:none}
   .th:not(.lvl-strip):not(.lvl-compact) .more{position:absolute;right:6px;top:42px;width:30px;height:26px}
+  .th.tight .more,.th.lvl-compact .more,.th.lvl-strip .more{right:40px}
   .fbtn{width:30px;height:30px}
   .fbtn svg{width:15px;height:15px}
   .th.lvl-strip .fbtn,.th.lvl-compact .fbtn{height:20px}
@@ -427,9 +455,9 @@ button.rpchip:hover{border-color:#4a5263}
   .panel .acts .btn{padding:9px 12px}
   .lbcard{grid-template-columns:1fr}
   .kinds{grid-template-columns:1fr}
-  #newTrack{order:2}
-  #aiBtn{order:2}
-  #rpBtn{order:2}
+  .rphead h2{font-size:21px}
+  .rphead .lede{margin-top:2px;font-size:12px}
+  .rphead{padding:12px 16px 8px;margin:-20px -20px 0}
   .rpi{grid-template-columns:1fr}
   .rpd{grid-column:1}
   .lbmeta{padding-top:12px}
@@ -438,28 +466,27 @@ button.rpchip:hover{border-color:#4a5263}
 </style>
 
 <div id="app">
-  <header class="top">
-    <div class="brand"><span class="logo">Z<i>o</i><i>o</i><i>o</i>mtime</span><span class="tag">Prototype</span></div>
-    <div class="search">
+  <header class="top" id="top">
+    <div class="brand"><span class="logo">Z<i>o</i><i>o</i><i>o</i>mtime</span></div>
+    <button id="searchBtn" class="ib" data-tip="Search" aria-label="Search the timeline" aria-expanded="false"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4.5 4.5"/></svg></button>
+    <div class="search" id="searchBox" hidden>
       <input id="q" type="search" placeholder="Search events, eras, people" autocomplete="off" aria-label="Search the timeline">
       <div id="results" class="results" hidden></div>
     </div>
-    <nav class="jumps" aria-label="Jump to a scale">
-      <button data-jump="all">10,000 years</button>
-      <button data-jump="ancient">Antiquity</button>
-      <button data-jump="medieval">Middle Ages</button>
-      <button data-jump="modern">Modern</button>
-    </nav>
     <span class="spacer"></span>
-    <button id="aiBtn" class="btn ai" data-aibuild hidden>✦ Build with AI</button>
-    <button id="rpBtn" class="btn" title="What was happening in the tracks and years on screen">▤ Report</button>
-    <button id="newTrack" class="btn" data-newtrack>+ New track</button>
-    <button id="add" class="btn primary">+ Add entry</button>
+    <div class="tools">
+      <button id="fitBtn" class="ib" data-tip="Show all 10,000 years" aria-label="Zoom out to all 10,000 years"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V3h4M17 7V3h-4M3 13v4h4M17 13v4h-4"/><path d="M6.5 10h7"/></svg></button>
+      <button id="tracksBtn" class="ib" data-tip="Tracks: show, hide, compare" aria-expanded="false" aria-controls="tracksMenu" aria-label="Tracks"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h9"/></svg><span class="badge" id="tracksCount"></span></button>
+      <button id="rpBtn" class="ib" data-tip="Report on what’s on screen" aria-label="Report: what was happening in the tracks and years on screen"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2.5h7l3 3v12H5z"/><path d="M8 9h5M8 12h5M8 15h3"/></svg></button>
+      <button id="aiBtn" class="ib ai" data-aibuild data-tip="Build a track with AI" aria-label="Build a track with AI" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5l1.7 4.3 4.3 1.7-4.3 1.7L10 14.5l-1.7-4.3L4 8.5l4.3-1.7z"/><path d="M15.5 13.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></button>
+      <button id="newTrack" class="ib" data-newtrack data-tip="New track" aria-label="New track"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h10M3 10h7M3 15h7"/><path d="M15 11v6M12 14h6"/></svg></button>
+      <button id="add" class="ib primary" data-tip="Add an entry" aria-label="Add an entry"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" stroke-width="2.2"><path d="M10 4v12M4 10h12"/></svg></button>
+    </div>
   </header>
 
   <main class="stage">
     <div class="heads">
-      <div class="rhead"><button id="tracksBtn" class="tbtn" aria-expanded="false" aria-controls="tracksMenu">Tracks ▾</button><div class="lvls" role="group" aria-label="Detail for all tracks"><button data-all="full" title="All tracks: Full" aria-label="All tracks full"></button><button data-all="compact" title="All tracks: Compact" aria-label="All tracks compact"></button><button data-all="strip" title="All tracks: Strip" aria-label="All tracks strip"></button></div></div>
+      <div class="rhead"><button id="headToggle" class="htog" data-tip="Hide track names" aria-label="Hide the track names" aria-pressed="false">‹</button><div class="lvls" role="group" aria-label="Detail for all tracks"><button data-all="full" title="All tracks: Full" aria-label="All tracks full"></button><button data-all="compact" title="All tracks: Compact" aria-label="All tracks compact"></button><button data-all="strip" title="All tracks: Strip" aria-label="All tracks strip"></button></div></div>
       <div class="hwrap" id="hwrap"><div id="hlist"></div></div>
     </div>
     <div id="focusBar" class="focusbar" hidden></div>
@@ -488,7 +515,7 @@ button.rpchip:hover{border-color:#4a5263}
   <footer class="foot">
     <div class="scale" id="scale"></div>
     <div class="readout" id="readout"></div>
-    <div class="hint">Scroll to zoom · drag to pan · click empty space to move the playhead · double-click to add</div>
+    <button class="ib sm" id="helpBtn" data-tip="Scroll or pinch to zoom · drag to pan · click empty space to move the playhead · double-click to add" aria-label="How to use the timeline"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M7.8 7.8a2.3 2.3 0 1 1 3.2 2.1c-.6.3-1 .8-1 1.5v.4"/><path d="M10 14.6h.01"/></svg></button>
   </footer>
 </div>
 
@@ -1132,7 +1159,7 @@ function keepF(it,tr){   // 2 = matches itself, 1 = kept as context for a match 
   fCache.set(k,r); return r;
 }
 function eraMode(it,tr){ return eraOv[it.id+'|'+tr.id]||eraOv[it.id+'|*']||trackFold[tr.id]||'auto'; }
-const saveLayout=()=>store.set('zooomtime.layout.v2',{order,hidden:[...hidden],collapsed:[...collapsed],detail,focus:[...focus],focusGroup,eraOv,trackFold,locInit:true,navInit:true,topInit:true,legendOff,trackFilter:Object.fromEntries(Object.entries(trackFilter).map(([k,f])=>[k,{q:f.q,min:f.min,mode:f.mode,subj:f.subj||'',during:f.during||'',where:f.where||''}]))});
+const saveLayout=()=>store.set('zooomtime.layout.v2',{order,hidden:[...hidden],collapsed:[...collapsed],detail,focus:[...focus],focusGroup,eraOv,trackFold,locInit:true,navInit:true,topInit:true,legendOff,headsHidden,trackFilter:Object.fromEntries(Object.entries(trackFilter).map(([k,f])=>[k,{q:f.q,min:f.min,mode:f.mode,subj:f.subj||'',during:f.during||'',where:f.where||''}]))});
 function toggleFav(id){ const t=TRACK_BY[id]; if(!t||t.fav||t===UNSORTED) return; if(isFav(id)) favState.ids=favState.ids.filter(x=>x!==id); else { favState.ids.push(id); collapsed.delete('fav'); } saveFavs(); saveLayout(); renderHeads(); toast(isFav(id)?`Added “${t.name}” to Favourites`:`Removed “${t.name}” from Favourites`); }
 function setTrackFold(tracks,mode){
   for(const t of tracks){ if(mode==='auto') delete trackFold[t.id]; else trackFold[t.id]=mode; for(const k of Object.keys(eraOv)) if(k.endsWith('|'+t.id)) delete eraOv[k]; }
@@ -2084,15 +2111,16 @@ function renderHeads(){
     const dd=rowDepth.has(t.id)?rowDepth.get(t.id):t.depth, grouped=vis.indexOf(t)<groupEnd;
     const shortcut=favRows.has(t.id)&&dd===1&&t!==UNSORTED;
     const path=((grouped&&dd===0)||shortcut)&&t.parentTrack&&t.parentTrack!==UNSORTED?(()=>{ const a=[]; for(let x=t.parentTrack;x;x=x.parentTrack) a.unshift(x.short||x.name); return `<span class="tpath">In ${esc(a.join(' › '))}</span>`; })():'';
-    return `<div class="th lvl-${lv}${dd?' sub':''}${grouped&&vis.indexOf(t)===groupEnd-1?' gend':''}${t.query?' gen':''}${fon||finh?' focused':''}" data-id="${t.id}" style="--d:${dd}"><span class="sw" style="background:${t.color}"></span><div class="tn">${path}<b>${fold}<span class="long">${esc(t.name)}</span><span class="short">${esc(t.short||t.name)}</span></b><small>${meta}</small>${filterOn(t)?`<button class="fchip" data-act="filter" aria-label="Edit filter on ${esc(t.name)}">${ICON.filter}<span>${esc(filterSummary(trackFilter[t.id]))}</span></button>`:''}</div>${fbtn}<button class="lvl" data-act="lvl" ${lvlLocked?'disabled':''} title="${lvlLocked?'Focused tracks show in full':`Detail: ${LVL_NAME[lv]} (click to change)`}" aria-label="${esc(t.name)} detail: ${LVL_NAME[lv]}. Change">${LVL_ICON[lv]}</button><button class="more" data-act="more" aria-haspopup="menu" aria-expanded="false" title="More: favourite, filter, eras, move, hide" aria-label="More actions for ${esc(t.name)}">⋯</button></div>`;
+    return `<div class="th lvl-${lv}${dd?' sub':''}${grouped&&vis.indexOf(t)===groupEnd-1?' gend':''}${t.query?' gen':''}${fon||finh?' focused':''}" data-id="${t.id}" style="--d:${dd}"><span class="sw" style="background:${t.color}" data-tip="${esc(t.name)}"></span><div class="tn">${path}<b>${fold}<span class="long">${esc(t.name)}</span><span class="short">${esc(t.short||t.name)}</span></b><small>${meta}</small>${filterOn(t)?`<button class="fchip" data-act="filter" aria-label="Edit filter on ${esc(t.name)}">${ICON.filter}<span>${esc(filterSummary(trackFilter[t.id]))}</span></button>`:''}</div>${fbtn}<button class="lvl" data-act="lvl" ${lvlLocked?'disabled':''} title="${lvlLocked?'Focused tracks show in full':`Detail: ${LVL_NAME[lv]} (click to change)`}" aria-label="${esc(t.name)} detail: ${LVL_NAME[lv]}. Change">${LVL_ICON[lv]}</button><button class="more" data-act="more" aria-haspopup="menu" aria-expanded="false" title="More: favourite, filter, eras, move, hide" aria-label="More actions for ${esc(t.name)}">⋯</button></div>`;
   }).join('');
   lastHeights='';
   $('#tracksMenu').innerHTML='<div class="mtop"><h3>Show tracks</h3><button class="btn" data-openpicker>◎ Compare tracks…</button></div>'+(function tree(list){ return list.filter(t=>t&&!t.internal).map(t=>{ const kids=(t.fav?favKids():(t.children||[])).filter(c=>!c.internal), open=menuOpen.has(t.id); return `<div class="mrow" style="padding-left:${t.depth*16}px">${kids.length?`<button class="mtog" data-mtog="${t.id}" aria-expanded="${open}" aria-label="${open?'Hide':'Show'} tracks inside ${esc(t.name)}">${open?'▾':'▸'}</button>`:'<span class="mtog-sp"></span>'}<label><input type="checkbox" id="tm-${t.id}" data-id="${t.id}" ${hidden.has(t.id)?'':'checked'}><span class="sw" style="background:${t.color}"></span><span class="mname">${esc(t.name)}</span>${kids.length&&!open?` <em>${kids.length}</em>`:t.query&&!t.place?' <em>generated</em>':t.user?' <em>yours</em>':''}</label>${t.fav||t===UNSORTED?'':`<button class="mstar${isFav(t.id)?' on':''}" data-star="${t.id}" aria-pressed="${isFav(t.id)}" aria-label="${isFav(t.id)?'Remove':'Add'} ${esc(t.name)} ${isFav(t.id)?'from':'to'} Favourites" title="${isFav(t.id)?'Remove from Favourites':'Add to Favourites'}">${isFav(t.id)?'★':'☆'}</button><button class="mfilt${filterOn(t)?' on':''}" data-filt="${t.id}" aria-label="Filter ${esc(t.name)}" title="Filter">${ICON.filter}</button>`}${t.user?`<button class="mmove" data-move="${t.id}" aria-label="Move ${esc(t.name)}" title="Give it a home">Move</button>`:''}${t.user?`<button class="mdel" data-del="${t.id}" aria-label="Delete ${esc(t.name)}">Delete</button>`:''}</div>`+(open?tree(kids):''); }).join(''); })(order.map(id=>TRACK_BY[id]))+'<div class="mfoot"><label class="mauto"><input type="checkbox" id="fav-auto" '+(favState.auto?'checked':'')+'> Star tracks I create</label><button class="btn" data-newtrack>+ New track</button><button class="btn" data-crowd>'+(crowdOn?'Remove stress test':'Stress test: load 5,000 synthetic lives')+'</button>'+(aiReady?'<button class="btn ai" data-aibuild>✦ Build a track with AI</button>':'')+'</div>';
-  $('#tracksBtn').innerHTML=`<span class="tlong">Tracks </span>${vis.length}/${TRACK_LIST.length} ▾`;
+  $('#tracksCount').textContent=vis.length; $('#tracksBtn').setAttribute('aria-label',`Tracks: ${vis.length} of ${TRACK_LIST.length} showing`); $('#tracksBtn').dataset.tip=`Tracks: ${vis.length} of ${TRACK_LIST.length} showing`;
   const levels=new Set(vis.map(lvl)); document.querySelectorAll('[data-all]').forEach(b=>b.setAttribute('aria-pressed',String(levels.size===1&&levels.has(b.dataset.all))));
   renderFocusBar(); updateReadout(); req();
 }
 $('#hlist').addEventListener('click',e=>{
+  if(headsHidden&&e.target.closest('.sw')){ headsHidden=false; applyHeads(); saveLayout(); qtip.hidden=true; return; }
   const b=e.target.closest('button'); if(!b) return;
   const id=b.closest('.th').dataset.id, act=b.dataset.act;
   if(act==='more'){ openMore(id,b); return; }
@@ -2127,7 +2155,7 @@ function headAct(id,act){
 // The track's other actions, in a labelled menu that opens beside the ⋯ button
 // Quick labels: shown at once on hover (the browser's own tooltips wait about a second)
 const qtip=$('#qtip');
-document.addEventListener('pointerover',e=>{ const el=e.target.closest&&e.target.closest('[data-tip]'); if(!el||e.pointerType==='touch'){ qtip.hidden=true; return; } qtip.textContent=el.dataset.tip; qtip.hidden=false; const r=el.getBoundingClientRect(); qtip.style.left=Math.max(4,r.left-4)+'px'; qtip.style.top=(r.top-qtip.offsetHeight-6)+'px'; });
+document.addEventListener('pointerover',e=>{ const el=e.target.closest&&e.target.closest('[data-tip]'); if(!el||e.pointerType==='touch'){ qtip.hidden=true; return; } qtip.textContent=el.dataset.tip; qtip.hidden=false; const r=el.getBoundingClientRect(); const tw=qtip.offsetWidth, th=qtip.offsetHeight; qtip.style.left=Math.max(4,Math.min(innerWidth-tw-4,r.left+r.width/2-tw/2))+'px'; qtip.style.top=(r.top-th-6<4?r.bottom+6:r.top-th-6)+'px'; });
 document.addEventListener('pointerdown',()=>{ qtip.hidden=true; },true);
 const moreEl=$('#tbmenu'); let moreId=null, moreBtn=null;
 function openMore(id,btn){
@@ -2404,16 +2432,29 @@ function runSearch(){
   res.innerHTML=resList.length?resList.map((it,i)=>`<button data-i="${i}" class="${i===0?'on':''}"><span class="dot" style="background:${it.track.color}"></span><span class="rt">${esc(it.title)}</span><span class="rw">${esc(it.e!=null?fmtWhen(it.t,it.prec):fmtItem(it))}</span></button>`).join(''):'<div class="none">No matches. You could add it with “+ Add entry”.</div>';
   res.hidden=false;
 }
+const topEl=$('#top'), searchBox=$('#searchBox');
+function openSearch(){ topEl.classList.add('searching'); searchBox.hidden=false; $('#searchBtn').setAttribute('aria-expanded','true'); q.focus(); if(q.value.trim()) runSearch(); }
+function closeSearch(){ topEl.classList.remove('searching'); searchBox.hidden=true; res.hidden=true; $('#searchBtn').setAttribute('aria-expanded','false'); }
+$('#searchBtn').addEventListener('click',()=>{ if(searchBox.hidden) openSearch(); else closeSearch(); });
+document.addEventListener('pointerdown',e=>{ if(!searchBox.hidden&&!e.target.closest('#searchBox,#searchBtn')&&!q.value.trim()) closeSearch(); });
+document.addEventListener('keydown',e=>{ if(e.key==='/'&&!e.target.closest('input,textarea,select')){ e.preventDefault(); openSearch(); } });
+$('#fitBtn').addEventListener('click',()=>{ const j=JUMPS.all; flyTo(j[0],j[1]); });
+$('#helpBtn').addEventListener('click',()=>toast('Scroll or pinch to zoom · drag to pan · tap empty space to move the playhead · double-click to add'));
+// Track names column: hide it to give the timeline the full width (the colour strips stay)
+let headsHidden=!!(savedLayout&&savedLayout.headsHidden);
+function applyHeads(){ const st=document.querySelector('.stage'); st.classList.toggle('nohead',headsHidden); const b=$('#headToggle'); b.textContent=headsHidden?'›':'‹'; b.dataset.tip=headsHidden?'Show track names':'Hide track names'; b.setAttribute('aria-label',headsHidden?'Show the track names':'Hide the track names'); b.setAttribute('aria-pressed',String(headsHidden)); }
+$('#headToggle').addEventListener('click',()=>{ headsHidden=!headsHidden; applyHeads(); saveLayout(); qtip.hidden=true; });
+applyHeads();
 q.addEventListener('input',runSearch);
 q.addEventListener('focus',()=>{ if(q.value.trim()) runSearch(); });
 q.addEventListener('keydown',e=>{
   if(res.hidden) return;
   if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); resIdx=(resIdx+(e.key==='ArrowDown'?1:-1)+resList.length)%Math.max(1,resList.length); [...res.querySelectorAll('button')].forEach((b,i)=>b.classList.toggle('on',i===resIdx)); }
   else if(e.key==='Enter'){ e.preventDefault(); pickResult(resIdx); }
-  else if(e.key==='Escape'){ res.hidden=true; }
+  else if(e.key==='Escape'){ res.hidden=true; closeSearch(); }
 });
 res.addEventListener('click',e=>{ const b=e.target.closest('[data-i]'); if(b) pickResult(+b.dataset.i); });
-function pickResult(i){ const it=resList[i]; if(!it) return; res.hidden=true; q.blur(); revealTrack(it.track.internal?placeTrackFor(it):it.track.id); goTo(it); }
+function pickResult(i){ const it=resList[i]; if(!it) return; res.hidden=true; q.blur(); closeSearch(); revealTrack(it.track.internal?placeTrackFor(it):it.track.id); goTo(it); }
 
 /* ---------- report: what was happening in the tracks and years on screen ---------- */
 const rpModal=$('#rpmodal'); let rpRefs=[], rpData=null, rpCtl=null; const rpCache=new Map();
