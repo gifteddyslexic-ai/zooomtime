@@ -239,7 +239,10 @@ button{cursor:pointer}
 
 /* detail panel */
 .panel{position:absolute;z-index:15;top:46px;right:12px;width:min(340px,calc(100% - 24px));max-height:calc(100% - 58px);overflow:auto;box-sizing:border-box;background:var(--raise);border:1px solid var(--line);border-radius:10px;box-shadow:0 18px 44px rgba(0,0,0,.5);padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px}
-.panel .x{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:6px;border:0;background:none;color:var(--muted);font-size:18px;line-height:1}
+.phead{position:sticky;top:-16px;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-16px -16px 0;padding:8px 8px 6px 16px;background:var(--raise);border-bottom:1px solid transparent}
+.panel.scrolled .phead{border-bottom-color:var(--line)}
+.phead .pt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.panel .x{flex:none;width:28px;height:28px;border-radius:6px;border:0;background:none;color:var(--muted);font-size:18px;line-height:1}
 .panel .x:hover{background:var(--panel-2);color:var(--fg)}
 .pt{display:flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .pt .sw{width:10px;height:10px;max-height:none;align-self:center;border-radius:2px}
@@ -334,7 +337,7 @@ button.pill:hover{border-color:var(--c)}
 .fchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .th.lvl-strip .fchip,.th.lvl-compact .fchip{display:none}
 .rcard{width:min(780px,100%);gap:10px}
-.rphead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.rphead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:sticky;top:-20px;z-index:3;margin:-20px -20px 0;padding:16px 20px 8px;background:var(--raise);border-radius:12px 12px 0 0}
 .rpx{padding:5px 10px}
 .rpacts{display:flex;flex-wrap:wrap;gap:6px}
 .rps{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:5px}
@@ -2321,8 +2324,7 @@ function showPanel(){
   if(!it){ pn.hidden=true; return; }
   const chain=[]; for(let p=it.parent;p;p=p.parent) chain.unshift(p);
   const n=countAll(it.kids);
-  pn.innerHTML=`<button class="x" id="pclose" aria-label="Close">×</button>
-    <div class="pt"><span class="sw" style="background:${it.track.color}"></span>${esc(it.track.name)}</div>
+  pn.innerHTML=`<div class="phead"><div class="pt"><span class="sw" style="background:${it.track.color}"></span>${esc(it.track.name)}</div><button class="x" id="pclose" aria-label="Close">×</button></div>
     <h2>${esc(it.title)}</h2>
     <div class="when">${esc(fmtItem(it))}${it.e!=null?` <span>· ${esc(fmtDur(it.e-it.t))}</span>`:''}</div>
     ${pathsHtml(it)}
@@ -2338,6 +2340,7 @@ function showPanel(){
     <div class="src">${it.real?`<b>From Wikidata</b> (<a href="https://www.wikidata.org/wiki/${esc(it.qid)}" target="_blank" rel="noopener">${esc(it.qid)}</a>, CC0). Covered by ${it.sitelinks} Wikipedia editions, which ranks who gets labelled.${it.conflict?' <b>Wikidata gives more than one date for this person</b>, so the earliest birth and latest death are shown as approximate.':' Some early dates may be Julian calendar.'}`:it.synthetic?`<b>Synthetic test life.</b> Not a real person. Notability score ${it.nb.toFixed(2)}, used to decide which lives get labels.`:it.ai?'<b>Drafted with AI.</b> From Claude’s own knowledge, without live sources. Check the date and add a source before relying on it.':it.user?'<b>Your contribution.</b> Saved in this browser only. In the full version it would join a review queue before going live.':'<b>Sample entry.</b> In the full version entries carry sources, edit history and a talk page.'+(it.tags.length?' Tags: '+it.tags.map(t=>esc(tagLabel(t))).join(', ')+'.':'')}</div>`;
   pn.hidden=false;
 }
+$('#panel').addEventListener('scroll',e=>e.currentTarget.classList.toggle('scrolled',e.currentTarget.scrollTop>4),{passive:true});
 $('#panel').addEventListener('change',e=>{ if(e.target.id==='ph-file' && sel){ addPhotos(sel,[...e.target.files]); } });
 $('#panel').addEventListener('click',e=>{
   const t=e.target.closest('button'); if(!t) return;
